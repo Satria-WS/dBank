@@ -1,19 +1,25 @@
 import { dbank } from "../../declarations/dbank";
 
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const button = e.target.querySelector("button");
+window.addEventListener("load",async function(){
+    console.log("Hello world");
+    const currentAmount = await dbank.checkBalance();
+    document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
 
-  const name = document.getElementById("name").value.toString();
-
-  button.setAttribute("disabled", true);
-
-  // Interact with foo actor, calling the greet method
-  const greeting = await dbank.greet(name);
-
-  button.removeAttribute("disabled");
-
-  document.getElementById("greeting").innerText = greeting;
-
-  return false;
 });
+
+document.querySelector("form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+    // //console.log(event);
+    const button = event.target.querySelector("#submit-btn");
+    console.log(button);
+
+    //we have to convert this into a floating point number to parseFloat
+    const inputAmount = parseFloat(document.getElementById("input-amount").value);
+    const outputAmount = parseFloat(document.getElementById("withdrawal-amount").value);
+
+    
+    await dbank.topUp(inputAmount);
+    const currentAmount = await dbank.checkBalance();
+    document.getElementById("value").innerText = Math.round(currentAmount * 100) / 100;
+
+})
