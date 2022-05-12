@@ -6,7 +6,7 @@ actor DBank {
   //adding stable keyword now upgrades our varable to a orthogonally persisted variable
   stable var currentValue: Float = 300;
   // var currentValue: Nat = 300;
-  //  currentValue := 100;
+   currentValue := 100;
 
   //current Time
   stable var startTime = Time.now();
